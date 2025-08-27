@@ -1,2 +1,2 @@
 # Programming-in-C
-Daily coding
+Daily coding in college
