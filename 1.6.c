@@ -1,4 +1,6 @@
 // Wap to check whether a given number is armstrong number or not.
+
+
 #include <stdio.h>
 #include <math.h>       
 int main() {
@@ -10,20 +12,17 @@ int main() {
 
     originalNum = num;
 
-    // store the number of digits of num in n
     for (originalNum = num; originalNum != 0; ++n) {
         originalNum /= 10;
     }
 
     originalNum = num;
 
-    // calculate the sum of the nth power of each digit
     for (originalNum = num; originalNum != 0; originalNum /= 10) {
         remainder = originalNum % 10;
         result += pow(remainder, n);
     }
 
-    // check if num is equal to the sum of the nth power of its digits
     if ((int)result == num)
         printf("%d is an Armstrong number.\n", num);
     else
