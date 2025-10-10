@@ -4,7 +4,7 @@
 #include <stdio.h> 
 int main() 
 { 
-    int n, i, j, temp; 
+    int n, i, j, t; 
     printf("Enter number of elements: "); 
     scanf("%d", &n); 
     int arr[n]; 
@@ -19,9 +19,9 @@ int main()
         { 
             if(arr[j] > arr[j+1]) 
             { 
-                temp = arr[j]; 
+                t = arr[j]; 
                 arr[j] = arr[j+1]; 
-                arr[j+1] = temp; 
+                arr[j+1] = t; 
             } 
         } 
     } 
