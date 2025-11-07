@@ -4,7 +4,7 @@
 int main() {
     FILE *filePtr;
     const char *filename = "output.txt";
-    const char *text = "Hello, this is a sample text written to the file.\n";
+    const char *text = "Hello, this is a sample text written to the file.\n this is the second line of the file.\n Have a great day!\n ";
 
     filePtr = fopen(filename, "w");
     if (filePtr == NULL) {
