@@ -2,60 +2,34 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-struct Node {
-    int data;
-    struct Node* next;
-};
-void append(struct Node** head_ref, int new_data) {
-    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
-    struct Node* last = *head_ref;
-    new_node->data = new_data;
-    new_node->next = NULL;
 
-    if (*head_ref == NULL) {
-        *head_ref = new_node;
-        return;
-    }
+typedef struct Node { int data; struct Node *next; } Node;
 
-    while (last->next != NULL) {
-        last = last->next;
-    }
+static Node *new_node(int v) {
+    Node *n = malloc(sizeof *n);
+    if (!n) exit(1);
+    n->data = v; n->next = NULL;
+    return n;
+}
 
-    last->next = new_node;
+void insertInMiddle(Node **h, int v) {
+    Node *n = new_node(v);
+    if (!*h) { *h = n; return; }
+    Node *s = *h, *f = *h;
+    while (f->next && f->next->next) { s = s->next; f = f->next->next; }
+    n->next = s->next; s->next = n;
 }
-void insertAfterMiddle(struct Node** head_ref, int new_data) {
-    if (*head_ref == NULL) {
-        append(head_ref, new_data);
-        return;
-    }
-    struct Node* slow = *head_ref;
-    struct Node* fast = *head_ref;
-    while (fast->next != NULL && fast->next->next != NULL) {
-        slow = slow->next;
-        fast = fast->next->next;
-    }
-    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
-    new_node->data = new_data;
-    new_node->next = slow->next;
-    slow->next = new_node;
+
+void printList(const Node *p) {
+    for (; p; p = p->next) printf("%d -> ", p->data);
+    puts("NULL");
 }
-void printList(struct Node* node) {
-    while (node != NULL) {
-        printf("%d -> ", node->data);
-        node = node->next;
-    }
-    printf("NULL\n");
-}
-int main() {
-    struct Node* head = NULL;   
-    append(&head, 1);
-    append(&head, 2);
-    append(&head, 4);           
-    append(&head, 5);
-    printf("Original Linked List: \n");
-    printList(head);
-    insertAfterMiddle(&head, 3);    
-    printf("Linked List after inserting 3 in the middle: \n");
+
+int main(void) {
+    int vals[] = {10,20,30,25,15};
+    Node *head = NULL;
+    for (size_t i = 0; i < sizeof vals / sizeof *vals; ++i) insertInMiddle(&head, vals[i]);
     printList(head);
     return 0;
-}   
+}
+

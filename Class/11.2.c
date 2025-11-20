@@ -2,14 +2,19 @@
 
 #include <stdio.h>
 int main() {
-    unsigned char num = 0b00001111; 
+    unsigned char a;
+    int shift;
 
-    unsigned char leftShift = num << 2;  
-    unsigned char rightShift = num >> 2; 
+    printf("Enter a number (0-255): ");
+    scanf("%hhu", &a);
+    printf("Enter number of positions to shift: ");
+    scanf("%d", &shift);
 
-    printf("Original number:      %08b\n", num);
-    printf("Left Shift by 2:     %08b\n", leftShift);
-    printf("Right Shift by 2:    %08b\n", rightShift);
+    unsigned char left_shift_result = a << shift;
+    unsigned char right_shift_result = a >> shift;
+
+    printf("Left shift of %u by %d positions: %u\n", a, shift, left_shift_result);
+    printf("Right shift of %u by %d positions: %u\n", a, shift, right_shift_result);
 
     return 0;
 }

@@ -2,20 +2,16 @@
 
 #include <stdio.h>
 int main() {
-    unsigned char a = 0b11001100; 
-    unsigned char b = 0b10101010; 
+    unsigned char a, b;
+    printf("Enter two numbers (0-255): ");
+    scanf("%hhu %hhu", &a, &b);
 
-    unsigned char andResult = a & b; 
-    unsigned char orResult = a | b;  
-    unsigned char notResultA = ~a;   
-    unsigned char notResultB = ~b;   
+    unsigned char and_result = a & b;
+    unsigned char or_result = a | b;
+    unsigned char not_a = ~a;   
 
-    printf("a:          %08b\n", a);
-    printf("b:          %08b\n", b);
-    printf("a AND b:    %08b\n", andResult);
-    printf("a OR b:     %08b\n", orResult);
-    printf("NOT a:      %08b\n", notResultA);
-    printf("NOT b:      %08b\n", notResultB);
-
+    printf("Bitwise AND of %u and %u: %u\n", a, b, and_result);
+    printf("Bitwise OR of %u and %u: %u\n", a, b, or_result);
+    printf("Bitwise NOT of %u: %u\n", a, not_a);
     return 0;
 }

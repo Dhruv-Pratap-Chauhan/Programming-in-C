@@ -1,8 +1,7 @@
 #include <stdio.h>
 
 struct Complex {
-    float real;
-    float imag;
+    float real, imag;
 };
 
 struct Complex readComplex() {
@@ -21,43 +20,36 @@ void writeComplex(struct Complex c) {
         printf("%.2f - %.2fi\n", c.real, -c.imag);
 }
 
-struct Complex addComplex(struct Complex c1, struct Complex c2) {
-    struct Complex result;
-    result.real = c1.real + c2.real;
-    result.imag = c1.imag + c2.imag;
-    return result;
+struct Complex add(struct Complex a, struct Complex b) {
+    struct Complex r = { a.real + b.real, a.imag + b.imag };
+    return r;
 }
 
-struct Complex subtractComplex(struct Complex c1, struct Complex c2) {
-    struct Complex result;
-    result.real = c1.real - c2.real;
-    result.imag = c1.imag - c2.imag;
-    return result;
+struct Complex sub(struct Complex a, struct Complex b) {
+    struct Complex r = { a.real - b.real, a.imag - b.imag };
+    return r;
 }
 
 int main() {
-    struct Complex c1, c2, sum, diff;
+    struct Complex c1, c2;
 
-    printf("Enter the first complex number:\n");
+    printf("Enter first complex number:\n");
     c1 = readComplex();
 
-    printf("Enter the second complex number:\n");
+    printf("Enter second complex number:\n");
     c2 = readComplex();
 
-    sum = addComplex(c1, c2);
-    diff = subtractComplex(c1, c2);
-
-    printf("\nFirst Complex Number: ");
+    printf("\nFirst: ");
     writeComplex(c1);
 
-    printf("Second Complex Number: ");
+    printf("Second: ");
     writeComplex(c2);
 
     printf("\nSum: ");
-    writeComplex(sum);
+    writeComplex(add(c1, c2));
 
     printf("Difference: ");
-    writeComplex(diff);
+    writeComplex(sub(c1, c2));
 
     return 0;
 }

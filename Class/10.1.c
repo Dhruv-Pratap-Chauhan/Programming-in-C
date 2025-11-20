@@ -1,43 +1,33 @@
-//Write a program to create a simple linked list in C using pointer and structure.
-
 #include <stdio.h>
 #include <stdlib.h>
-struct Node {
+
+typedef struct Node {
     int data;
-    struct Node* next;
-};
-void append(struct Node** head_ref, int new_data) {
-    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
-    struct Node* last = *head_ref;
-    new_node->data = new_data;
-    new_node->next = NULL;
+    struct Node *next;
+} Node;
 
-    if (*head_ref == NULL) {
-        *head_ref = new_node;
-        return;
-    }
-
-    while (last->next != NULL) {
-        last = last->next;
-    }
-
-    last->next = new_node;
+Node* append(Node *head, int val) {
+    Node *n = malloc(sizeof *n);
+    if (!n) return head;
+    n->data = val; n->next = NULL;
+    if (!head) return n;
+    Node *t = head;
+    while (t->next) t = t->next;
+    t->next = n;
+    return head;
 }
-void printList(struct Node* node) {
-    while (node != NULL) {
-        printf("%d -> ", node->data);
-        node = node->next;
-    }
-    printf("NULL\n");
+
+void printList(const Node *p) {
+    while (p) { printf("%d -> ", p->data); p = p->next; }
+    puts("NULL");
 }
-int main() {
-    struct Node* head = NULL;   
-    append(&head, 1);
-    append(&head, 2);
-    append(&head, 3);
-    append(&head, 4);
-    append(&head, 5);
-    printf("Created Linked List: \n");
+
+int main(void) {
+    int vals[] = {1,2,3,4,5};
+    Node *head = NULL;
+    for (size_t i = 0; i < sizeof vals / sizeof *vals; ++i)
+        head = append(head, vals[i]);
+    puts("Created Linked List:");
     printList(head);
     return 0;
-}   
+}
